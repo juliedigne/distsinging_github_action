@@ -10,7 +10,7 @@ for f in ${ARGS}; do
 	echo $filename
         for i in SOPRANO ALTO TENOR BASS ; do
 		rm ${filename}_${i}.mp3
-        	cpp -P -DDRUM -DSOPRANO $filename.lypp temp.ly 2> /dev/null
+        	cpp -P -DDRUM -D$i $filename.lypp temp.ly 2> /dev/null
         	lilypond temp.ly
         	timidity temp.midi -Ow -o temp.wav
         	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_$i.mp3
