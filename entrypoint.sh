@@ -10,7 +10,6 @@ for f in ${ARGS}; do
 	echo $filename
         for i in soprano alto tenor bass ; do
 		rm ${filename}_${i}.mp3
-		rm ${filename}_$(echo $i | tr a-z A-Z).mp3
         	cpp -P -DDRUM -D$(echo $i | tr a-z A-Z) $filename.lypp temp.ly 2> /dev/null
         	lilypond temp.ly
         	timidity temp.midi -Ow -o temp.wav
