@@ -8,9 +8,10 @@ echo "Lilypond files: ${ARGS}"
 for f in ${ARGS}; do
 	filename=${f%%.lypp}
 	echo $filename
-        for i in SOPRANO ALTO TENOR BASS ; do
+        for i in soprano alto tenor bass ; do
 		rm ${filename}_${i}.mp3
-        	cpp -P -DDRUM -D$i $filename.lypp temp.ly 2> /dev/null
+		rm ${filename}_$(echo $i | tr a-z A-Z).mp3
+        	cpp -P -DDRUM -D$(echo $i | tr a-z A-Z) $filename.lypp temp.ly 2> /dev/null
         	lilypond temp.ly
         	timidity temp.midi -Ow -o temp.wav
         	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_$i.mp3
