@@ -5,6 +5,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     && apt-get install -y lilypond \
     && apt-get install -y timidity \
     && apt-get install -y ffmpeg \
+    && apt-get install -y git \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /data/src
 
