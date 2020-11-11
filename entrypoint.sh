@@ -25,7 +25,7 @@ pagename=tmp/tmpmypage.md
 
 cat webhelper/header.md > $pagename
 
-for i in $(ls -d */ | grep -v tmp | grep -v webhelper) ; do
+for i in $(ls -d */ | grep -v tmp | grep -v webhelper | sort -r) ; do
        echo "Processing ${i%%/}"
        cat ${i}info.md >> $pagename
        echo "<br/><br/>">> $pagename
@@ -37,15 +37,15 @@ for i in $(ls -d */ | grep -v tmp | grep -v webhelper) ; do
 
        echo "<br/>" >> $pagename
 
-       if test -f ave_verum_corpus/*resultat.mp3; then
-	      res=ave_verum_corpus/*resultat.mp3
+       if test -f ${i}*resultat.mp3; then
+	      res=${i}*resultat.mp3
 	      echo "Result file exists";
 	      echo "_Résultat du montage_:  " >> $pagename
 	      resname=${res##*/}
-	      echo "[$resname](https://github.com/juliedigne/distantsinging/raw/main/ave_verum_corpus/$res)  " >> $pagename
+	      echo "[$resname](https://github.com/juliedigne/distantsinging/raw/main/$res)  " >> $pagename
 
-	      if test -f ave_verum_corpus/credits.md; then
-	      	cat ave_verum_corpus/credits.md >> $pagename
+	      if test -f ${i}/credits.md; then
+	      	cat ${i}/credits.md >> $pagename
 	      fi
        fi
 done
