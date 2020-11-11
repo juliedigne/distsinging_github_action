@@ -63,7 +63,7 @@ git checkout origin/gh-pages
 cp $pagename mypage.md
 git add mypage.md
 git commit mypage.md -m "GH page automatic update through github action"
-git push --force $REMOTE_REPO gh-pages
+git push --force $REMOTE_REPO
 
 
 echo "::set-output name=mp3s::${OUTPUT}"
