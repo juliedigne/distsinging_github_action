@@ -50,36 +50,20 @@ for i in $(ls -d */ | grep -v tmp) ; do
        fi
 done
 
-git --global user.email "githubaction@github.com"
-git --global user.name "Auto commit"
+set -x
 
-git checkout gh-pages
+git fetch origin
+
+REMOTE_BRANCH="gh-pages"
+REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
+git config --global user.email "githubaction@github.com"
+git config --global user.name "ghpage action commit"
+
+git checkout --track origin/gh-pages
 cp $pagename mypage.md
 git add mypage.md
-git commit mypage.md
-git push
+git commit mypage.md -m "GH page automatic update through github action"
+git push --force $REMOTE_REPO
 
 
 echo "::set-output name=mp3s::${OUTPUT}"
-
-echo "jusque là ça va"
-
-#ARGS="$@"
-#OUTPUT=""
-#echo "Lilypond list: ${ARGS}"
-#for f in ${ARGS}; do
-#    echo "Processing ${f}"
-#    if [ ! -f ${f} ]; then
-#        echo "Error: ${f} does not exists"
-#        exit 1
-#    fi
-#
-#    lilypond -o $(dirname ${f}) ${f}
-#    if [ $? -ne 0 ]; then
-#        echo "Error: Compilation failure on ${f}"
-#    fi
-#
-#    OUTPUT="${OUTPUT}${f%%ly}pdf "
-#done
-#
-#echo "::set-output name=pdfs::${OUTPUT}"
