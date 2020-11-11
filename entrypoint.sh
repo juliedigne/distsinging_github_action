@@ -50,6 +50,7 @@ done
 
 set -x
 
+git fetch origin:gh-pages
 git branch -a
 git remote -v
 
