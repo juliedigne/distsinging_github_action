@@ -29,7 +29,7 @@ for i in $(ls -d */ | grep -v tmp | grep -v webhelper | sort -r) ; do
        echo "Processing ${i%%/}"
        cat ${i}info.md >> $pagename
        echo "<br/><br/>">> $pagename
-       echo "*Fichiers de travail (mp3):*<br/>" >> $pagename 
+       echo "Fichiers de travail (mp3):<br/>" >> $pagename 
        for j in ${i}*soprano.mp3 ${i}*alto.mp3 ${i}*tenor.mp3 ${i}*bass.mp3; do
 	       k=${j##*/}
 	       echo "[$k](https://github.com/juliedigne/distantsinging/releases/download/main/$k)  " >> $pagename
