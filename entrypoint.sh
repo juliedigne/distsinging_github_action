@@ -23,6 +23,8 @@ mkdir tmp
 
 pagename=tmp/tmpmypage.md
 
+cat webhelper/header.md >>$pagename
+
 for i in $(ls -d */ | grep -v tmp) ; do
        echo "Processing ${i%%/}"
        cat ${i}info.md >> $pagename
