@@ -19,39 +19,40 @@ for f in ${ARGS}; do
         done
 done
 
-git checkout gh-branch
 
-touch mypage.md
-git add mypage.md
+mkdir tmp
+
+pagename=tmp/tmpmypage.md
 
 for i in $(ls -d */) ; do
        echo "Processing ${i%%/}"
-       cat ${i}info.md >> mypage.md
-       echo "<br/><br/>">> mypage.md
-       echo "*Fichiers de travail (mp3):*" >> mypage.md 
+       cat ${i}info.md >> $pagename
+       echo "<br/><br/>">> $pagename
+       echo "*Fichiers de travail (mp3):*" >> $pagename 
        for j in ${i}*soprano.mp3 ${i}*alto.mp3 ${i}*tenor.mp3 ${i}*bass.mp3; do
 	       k=${j##*/}
-	       echo "[$k]($j)  " >> mypage.md
-	       git add $j
+	       echo "[$k](https://github.com/juliedigne/distantsinging/releases/download/main/$k)  " >> $pagename
        done
 
-       echo "<br/>" >> mypage.md
+       echo "<br/>" >> $pagename
 
        if test -f ave_verum_corpus/*resultat.mp3; then
 	      res=ave_verum_corpus/*resultat.mp3
-	      git add $res
 	      echo "Result file exists";
-	      echo "_Résultat du montage_:  " >> mypage.md
+	      echo "_Résultat du montage_:  " >> $pagename
 	      resname=${res##*/}
-	      echo "[$resname]($res)  " >> mypage.md
+	      echo "[$resname](https://github.com/juliedigne/distantsinging/raw/main/ave_verum_corpus/$res)  " >> $pagename
 
 	      if test -f ave_verum_corpus/credits.md; then
-	      	cat ave_verum_corpus/credits.md >> mypage.md
+	      	cat ave_verum_corpus/credits.md >> $pagename
 	      fi
        fi
 done
 
-git commit -a
+git checkout gh-page
+cp $pagename mypage.md
+git add mypage.md
+git commit mypage.md
 git push
 
 
