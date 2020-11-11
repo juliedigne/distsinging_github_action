@@ -50,7 +50,7 @@ done
 
 set -x
 
-git fetch origin/gh-pages
+git fetch origin
 git branch -a
 git remote -v
 
@@ -59,7 +59,7 @@ REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
 git config --global user.email "githubaction@github.com"
 git config --global user.name "ghpage action commit"
 
-git checkout gh-pages
+git checkout origin/gh-pages
 cp $pagename mypage.md
 git add mypage.md
 git commit mypage.md -m "GH page automatic update through github action"
