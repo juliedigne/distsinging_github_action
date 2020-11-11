@@ -55,8 +55,7 @@ git commit mypage.md
 git push
 
 
-#echo "::set-output name=mp3s::${OUTPUT}"
-#echo "::set-output name=ghpages::mypage.md"
+echo "::set-output name=mp3s::${OUTPUT}"
 
 echo "jusque là ça va"
 
