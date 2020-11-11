@@ -50,6 +50,9 @@ done
 
 set -x
 
+git branch -a
+git remote -v
+
 REMOTE_BRANCH="gh-pages"
 REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
 git config --global user.email "githubaction@github.com"
