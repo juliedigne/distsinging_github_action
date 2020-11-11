@@ -48,7 +48,10 @@ for i in $(ls -d */ | grep -v tmp) ; do
        fi
 done
 
-git checkout gh-page
+git --global user.email "githubaction@github.com"
+git --global user.name "Auto commit"
+
+git checkout gh-pages
 cp $pagename mypage.md
 git add mypage.md
 git commit mypage.md
