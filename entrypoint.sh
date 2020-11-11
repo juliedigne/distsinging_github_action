@@ -48,6 +48,7 @@ for i in $(ls -d */ | grep -v tmp) ; do
        fi
 done
 
+REMOTE_BRANCH="gh-pages"
 REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
 git --global user.email "githubaction@github.com"
 git --global user.name "ghpage action commit"
