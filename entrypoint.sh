@@ -60,9 +60,9 @@ git config --global user.email "githubaction@github.com"
 git config --global user.name "ghpage action commit"
 
 git checkout --track origin/gh-pages
-cp $pagename mypage.md
-git add mypage.md
-git commit mypage.md -m "GH page automatic update through github action"
+cp $pagename index.md
+git add index.md
+git commit index.md -m "GH page automatic update through github action"
 git push --force $REMOTE_REPO
 
 
