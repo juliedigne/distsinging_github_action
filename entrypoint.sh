@@ -48,14 +48,15 @@ for i in $(ls -d */ | grep -v tmp) ; do
        fi
 done
 
+REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
 git --global user.email "githubaction@github.com"
-git --global user.name "Auto commit"
+git --global user.name "ghpage action commit"
 
 git checkout gh-pages
 cp $pagename mypage.md
 git add mypage.md
-git commit mypage.md
-git push
+git commit mypage.md -m "GH page automatic update through github action"
+git push --force $REMOTE_REPO master:$REMOTE_BRANCH
 
 
 echo "::set-output name=mp3s::${OUTPUT}"
