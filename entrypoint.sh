@@ -21,7 +21,7 @@ for f in ${ARGS}; do
           	cpp -P -DDRUM -DSOPRANO -DALTO-DTENOR -DBASS $filename.lypp temp.ly 2> /dev/null
           	lilypond temp.ly
           	timidity temp.midi -Ow -o temp.wav
-          	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_$i.mp3
+          	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_tutti.mp3
           	rm temp*
                 OUTPUT="${OUTPUT}${filename}_tutti.mp3 "
 	fi
