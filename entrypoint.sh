@@ -15,8 +15,15 @@ for f in ${ARGS}; do
           	timidity temp.midi -Ow -o temp.wav
           	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_$i.mp3
           	rm temp*
-                  OUTPUT="${OUTPUT}${filename}_$i.mp3 "
+                OUTPUT="${OUTPUT}${filename}_$i.mp3 "
           done
+
+          	cpp -P -DDRUM -DSOPRANO -DALTO-DTENOR -DBASS $filename.lypp temp.ly 2> /dev/null
+          	lilypond temp.ly
+          	timidity temp.midi -Ow -o temp.wav
+          	ffmpeg -i temp.wav -vn -ar 44100 -ac 2 -b:a 192k ${filename}_$i.mp3
+          	rm temp*
+                OUTPUT="${OUTPUT}${filename}_tutti.mp3 "
 	fi
 done
 
@@ -33,7 +40,7 @@ for i in $(ls -d */ | grep -v tmp | grep -v webhelper | sort -r) ; do
        if test -f ${i}*soprano.mp3; then
            echo "<br/><br/>">> $pagename
            echo "Fichiers de travail (mp3):<br/>" >> $pagename 
-           for j in ${i}*soprano.mp3 ${i}*alto.mp3 ${i}*tenor.mp3 ${i}*bass.mp3; do
+           for j in ${i}*soprano.mp3 ${i}*alto.mp3 ${i}*tenor.mp3 ${i}*bass.mp3 ${i}*tutti.mp3; do
                    k=${j##*/}
                    echo "[$k](https://github.com/juliedigne/distantsinging/releases/download/main/$k)  " >> $pagename
            done
