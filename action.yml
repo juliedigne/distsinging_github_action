@@ -13,6 +13,7 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  #image: 'Dockerfile'
+  image: 'docker://ghcr.io/juliedigne/distsinging_github_action:v1'
   args:
     - ${{ inputs.lypp_files }}
